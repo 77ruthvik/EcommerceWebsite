@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles/login.css">
+        <title>Ecommerce Login</title>
+    </head>
+    <body>
+        <p class="title">User Login</p>
+        <a href="/" class="homepage">&#60;&#60; Home Page</a>
+            <div class="login-card">
+                <form action="/login-user" method="post">
+                    <p>Username</p>
+                    <input type="text" name="username" class="user-input" placeholder="Please Enter your Username">
+                    <p>Password</p>
+                    <input type="password" name="password" class="user-input" placeholder="Please Enter your Password">
+                    <button class="login-but">Login</button>
+                    <% if(message != '') { %>
+                        <p class="message"><%= message %></p>
+                    <% } %>
+                </form>
+            </div>
+            <div class="signup">
+                <a href="/signup" class="signup-text">New User? You can Signup by <span class="underline">clicking here!</span></a>
+            </div>
+    </body>
+</html>

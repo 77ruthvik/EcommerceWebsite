@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles/styles.css">
+        <title>E-Commerce Website</title>
+    </head>
+    <body>
+        <header class="head">
+            <div class="left-side">
+                <button class="sidebar"><img class="sidebar-img" src="Logos/Sidebar.png" alt=""></button>
+            </div>
+            <div class="middle">
+                <a href="/" class="homepage-click"><img src="Logos/Website-logo.png" class="web-logo" alt=""></a>
+            </div>
+            <div class="right-side">
+                    <form action="/search" method="post" class="search-box">
+                        <input type="text" name="user-input" class="searchbar" placeholder="Search">
+                        <button class="search"><img class="search-logo" src="Logos/search.png" alt=""></button>
+                    </form>
+                    <form action="/cart" method="get">
+                        <button class="cart-but"><img class="cart-img" src="Logos/Cart.png" alt=""></button>
+                    </form>
+                    <% if(cart_count[0].count > 0) { %>
+                        <button class="notifications">
+                                <%= cart_count[0].count %>
+                        </button>
+                    <% } %>
+                    <% if(user.length>0) { %>
+                        <div class="username">
+                            <p class="welcome-text">Welcome <%= user[0]['name'] %> </p>
+                            <form action="/signout" method="get">
+                                <button class="signout-but">Signout</button>
+                            </form>
+                        </div>
+                    <% } else {%>
+                        <form action="/login" method="get">
+                            <button class="login">Login</button>
+                        </form>
+                    <% } %>
+            </div>
+        </header>
+        <form action="/filter" method="post">
+            <div class="options">
+                <p>Filter:</p>
+                <select name="user_options" id="user_op">
+                    <option value="All" selected>All</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Food">Food</option>
+                </select>
+                <button>Filter Items</button>
+            </div>
+        </form>
+        <% if(user_choice == 'All') { %>
+            <% if(data.length>0) { %>
+                <p class="section-title">Technology</p>
+                <div class="items-list">
+                    <% for(let i=0; i<data.length; i++) { %>
+                            <div class="card">
+                                <img class="display-pic" src="<%= data[i].src %>" alt="">
+                                <a href="/item-data:<%= data[i].id %>" class="item-data"><strong><%= data[i].item_name %></strong></a>
+                                <p>$<%= data[i].price.toFixed(2) %></p>
+                                <form action="/add" method="post">
+                                    <button type="submit" name="item" value="<%= data[i].id %>" class="cart">Add To Cart</button>
+                                </form>
+                                <!-- <form action="/deletefromcart" method="post">
+                                    <button type="submit" name="item" value="<%= data[i].id %>" class="cart_del">Delete from Cart</button>
+                                </form> -->
+                            </div>
+                    <% } %>
+                </div>
+            <% } %>
+    
+            <% if(foods.length>0) { %>
+                <p class="section-title">Food</p>
+                <div class="items-list">
+                
+                    <% for(let i=0; i<foods.length; i++) { %>
+                        <div class="card">
+                            <img class="display-pic" src="<%= foods[i].src %>" alt="">
+                            <a href="/item-data:<%= foods[i].id %>" class="item-data"><strong><%= foods[i].food_name %></strong></a>
+                            <p>$<%= foods[i].price.toFixed(2) %></p>
+                            <form action="/add" method="post">
+                                <button type="submit" name="food" value="<%= foods[i].id %>" class="cart">Add To Cart</button>
+                            </form>
+                            <!-- <form action="/deletefromcart" method="post">
+                                <button type="submit" name="item" value="<%= foods[i].id %>" class="cart_del">Delete from Cart</button>
+                            </form> -->
+                        </div>
+                    <% } %>
+                
+                </div>
+            <% } %>
+        <% } else if (user_choice == 'Technology') { %>
+            <% if(data.length>0) { %>
+                <p class="section-title">Technology</p>
+                <div class="items-list">
+                    <% for(let i=0; i<data.length; i++) { %>
+                            <div class="card">
+                                <img class="display-pic" src="<%= data[i].src %>" alt="">
+                                <a href="/item-data:<%= data[i].id %>" class="item-data"><strong><%= data[i].item_name %></strong></a>
+                                <p>$<%= data[i].price.toFixed(2) %></p>
+                                <form action="/add" method="post">
+                                    <button type="submit" name="item" value="<%= data[i].id %>" class="cart">Add To Cart</button>
+                                </form>
+                                <!-- <form action="/deletefromcart" method="post">
+                                    <button type="submit" name="item" value="<%= data[i].id %>" class="cart_del">Delete from Cart</button>
+                                </form> -->
+                            </div>
+                    <% } %>
+                </div>
+            <% } %>
+        <% } else { %>
+            <% if(foods.length>0) { %>
+                <p class="section-title">Food</p>
+                <div class="items-list">
+                
+                    <% for(let i=0; i<foods.length; i++) { %>
+                        <div class="card">
+                            <img class="display-pic" src="<%= foods[i].src %>" alt="">
+                            <a href="/item-data:<%= foods[i].id %>" class="item-data"><strong><%= foods[i].food_name %></strong></a>
+                            <p>$<%= foods[i].price.toFixed(2) %></p>
+                            <form action="/add" method="post">
+                                <button type="submit" name="food" value="<%= foods[i].id %>" class="cart">Add To Cart</button>
+                            </form>
+                            <!-- <form action="/deletefromcart" method="post">
+                                <button type="submit" name="item" value="<%= foods[i].id %>" class="cart_del">Delete from Cart</button>
+                            </form> -->
+                        </div>
+                    <% } %>
+                
+                </div>
+            <% } %>
+        <% } %>
+        
+    </body>
+</html>

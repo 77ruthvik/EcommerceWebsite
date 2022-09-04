@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles/signup.css">
+        <title>Ecommerce Signup</title>
+    </head>
+    <body>
+        <p class="title">Welcome to Signup Page</p>
+        <a href="/" class="homepage">&#60;&#60; Home Page</a>
+        <form action="/signup-data" method="post">
+            <div class="signup-card">
+                <p>Name</p>
+                <input type="text" class="user_input" name="name" placeholder="Please Enter Your Name">
+                <p>Email Address</p>
+                <input type="text" class="user_input" name="email" placeholder="Please Enter Your Email Address">
+                <p>Username</p>
+                <input type="text" class="user_input" name="username" placeholder="Please Enter Your Preferred Username">
+                <p>Password</p>
+                <input type="password" class="user_input" name="password" placeholder="Please Enter Your Preferred Password">
+                <button class="signup-but">Signup</button>
+                <% if(signup_message) { %>
+                    <p class="signup_message"><%= signup_message %></p>
+                <% } %>
+            </div>
+        </form>
+    </body>
+</html>

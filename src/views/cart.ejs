@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="styles/cart.css">
+        <title>Cart Items</title>
+    </head>
+    <body>
+        <header class="head">
+            <div class="left-side">
+                <button class="sidebar"><img class="sidebar-img" src="Logos/Sidebar.png" alt=""></button>
+            </div>
+            <div class="middle">
+                <a href="/" class="homepage-click"><img src="Logos/Website-logo.png" class="web-logo" alt=""></a>
+            </div>
+            <div class="right-side">
+                <form action="/search" method="post" class="search-box">
+                    <input type="text" name="user-input" class="searchbar" placeholder="Search">
+                    <button class="search"><img class="search-logo" src="Logos/search.png" alt=""></button>
+                </form>
+                <form action="/cart" method="get">
+                    <button class="cart-but"><img class="cart-img" src="Logos/Cart.png" alt=""></button>
+                </form>
+                <% if(cart_count[0].count > 0) { %>
+                    <button class="notifications">
+                        <%= cart_count[0].count %>
+                    </button>
+                <% } %>
+                <% if(user.length>0) { %>
+                    <div class="username">
+                        <p class="welcome-text">Welcome <%= user[0]['name'] %> </p>
+                        <form action="/signout" method="get">
+                            <button class="signout-but">Signout</button>
+                        </form>
+                    </div>
+                <% } else {%>
+                    <form action="/login" method="get">
+                        <button class="login">Login</button>
+                    </form>
+                <% } %>
+            </div>
+        </header>
+        <div class="cart-display">
+            <% if(user) {%>
+                <p class="title">Cart Items of <%= user[0]['name'] %></p>
+                <!-- <a href="/" class="homepage">&#60;&#60; Home Page</a> -->
+                <div class="cart-card">
+                    <% if(cart_items.length == 0) { %>
+                        <p class="cart_text">Cart is Empty</p>
+                    <% } else { %>
+                        <% for(let i=0; i<cart_items.length; i++) { %>
+                            <div class="cart-list">
+                                <div class="cart_img">
+                                    <img src="<%= cart_items[i]['img'] %>" class="img" alt="/">
+                                </div>
+                                <div class="list-data">
+                                    <p>&#183;</p>
+                                    <p><%= cart_items[i]['item_name'] %></p>
+                                    <p>&#183;</p>
+                                    <p>Quantity: <%=cart_items[i].quantity %></p>
+                                    <p>&#183;</p>
+                                    <p>$<%= cart_items[i]['price'].toFixed(2) %></p>
+                                    <p>&#183;</p>
+                                    <p><%= cart_items[i]['date'] %></p>
+                                    <p>&#183;</p>
+                                    <p><%= cart_items[i]['time'] %></p>
+                                    <p>&#183;</p>
+                                    <form action="/deletefromcart" method="post">
+                                        <button type="submit" name="item" value="<%= cart_items[i]['cart_id'] %>" class="cart_del">Delete from Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% } %>
+                        <form action="/checkout" method="post">
+                            <button class="checkout">Checkout</button>
+                        </form>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>

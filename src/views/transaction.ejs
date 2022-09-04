@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="styles/transaction.css">
+        <title>Checkout</title>
+    </head>
+    <body>
+        <header class="head">
+            <div class="left-side">
+                <button class="sidebar"><img class="sidebar-img" src="Logos/Sidebar.png" alt=""></button>
+            </div>
+            <div class="middle">
+                <a href="/" class="homepage-click"><img src="Logos/Website-logo.png" class="web-logo" alt=""></a>
+            </div>
+            <div class="right-side">
+                <form action="/search" method="post" class="search-box">
+                    <input type="text" name="user-input" class="searchbar" placeholder="Search">
+                    <button class="search"><img class="search-logo" src="Logos/search.png" alt=""></button>
+                </form>
+                <form action="/cart" method="get">
+                    <button class="cart-but"><img class="cart-img" src="Logos/Cart.png" alt=""></button>
+                </form>
+                <% if(cart_count[0].count > 0) { %>
+                    <button class="notifications">
+                        <%= cart_count[0].count %>
+                    </button>
+                <% } %>
+                <% if(user.length>0) { %>
+                    <div class="username">
+                        <p class="welcome-text">Welcome <%= user[0]['name'] %> </p>
+                        <form action="/signout" method="get">
+                            <button class="signout-but">Signout</button>
+                        </form>
+                    </div>
+                <% } else {%>
+                    <form action="/login" method="get">
+                        <button class="login">Login</button>
+                    </form>
+                <% } %>
+            </div>
+        </header>
+        <div class="display">
+            <p class="text"><%= user[0].name %>, Your Purchases are Successful!</p>
+        </div>
+    </body>
+</html>
