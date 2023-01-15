@@ -354,7 +354,8 @@ controller.search = (req, res) => {
                                     data: succ,
                                     foods: foods,
                                     cart_count: items,
-                                    user: user_info
+                                    user: user_info,
+                                    user_choice: user_choice
                                 });
                             }
                         });
@@ -364,7 +365,8 @@ controller.search = (req, res) => {
                             data: succ,
                             foods: foods,
                             cart_count: [{count: 0}],
-                            user: user_info
+                            user: user_info,
+                            user_choice: user_choice
                         });
                     }
                 });
