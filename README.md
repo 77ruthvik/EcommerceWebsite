@@ -1,6 +1,6 @@
 # EcommerceWebsite
 
-[Screenshots of the Website:]
+Screenshots of the Website:
 
 [Main Page:](https://github.com/77ruthvik/EcommerceWebsite/blob/main/Images/Main%20Page.png) <br/>
 [Login Page:](https://github.com/77ruthvik/EcommerceWebsite/blob/main/Images/Login%20Page.png) <br/>
